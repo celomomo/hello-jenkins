@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo '"$(date)" >> /home/quangvt/hello.txt'
+                echo -e '"$(date)" >> /home/quangvt/hello.txt'
             }
         }
     }
