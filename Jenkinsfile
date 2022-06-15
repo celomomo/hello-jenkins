@@ -4,7 +4,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh("./run.sh")
-                echo "date"
             }
         }
     }
