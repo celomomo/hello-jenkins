@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: rockylinux:8.5
+
+%post
+    dnf install wget net-tools telnet -y
+    export BEEGFS_VERSION=7.3.0
+    rpm --import https://www.beegfs.io/release/beegfs_"${BEEGFS_VERSION}"/gpg/GPG-KEY-beegfs
+    wget https://www.beegfs.io/release/beegfs_"${BEEGFS_VERSION}"/dists/beegfs-rhel8.repo -O /etc/yum.repos.d/beegfs.repo
+    dnf update -y && dnf install beegfs-storage -y
+    mkdir /beegfs-storage
+    rm -rf /beegfs-storage/*
+
+%startscript
+    /opt/beegfs/sbin/beegfs-setup-storage -p /beegfs-storage -s "${1}" -i "${2}" -m "${3}" -f
+    /etc/init.d/beegfs-storage start
+

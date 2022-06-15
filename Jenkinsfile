@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh("./run.sh")
+                sh("./build-mgmtd.sh")
+                sh("./build-meta-storage.sh")
+                sh ("./build-client.sh")
                 echo "helloworld"
             }
         }
